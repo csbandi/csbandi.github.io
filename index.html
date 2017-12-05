@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>ebird Data Visualisation</title>
+    <title>ebird-India checklist locations until Aug 2017 Visualisation</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
@@ -20,14 +20,20 @@
         padding: 10px;
         font-family: 'Open Sans', sans-serif;
     }
+
+	.mapboxgl-popup-content {
+		background-color: #EAEDED;
+	}
+    
     
     .mapboxgl-popup {
+    	background-color: #8d8d8d;
         max-width: 400px;
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;        
     }
 
     .legend {
-      background-color: #BFC9CA;
+      background-color: #8d8d8d;
       border-radius: 3px;
       bottom: 30px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -57,7 +63,7 @@
       border-radius: 50%;
       display: inline-block;
       margin-right: 5px;
-      opacity: 0.8;
+      opacity: 0.6;
       background-color: #d49a66;
     }
 
@@ -108,7 +114,7 @@
             },
             // color circles by ethnicity, using data-driven styles
             
-            'circle-opacity': 0.4,
+            'circle-opacity': 0.45,
 
             'circle-color': {
                 property: 'count',
@@ -116,10 +122,10 @@
                 stops: [
                     [0, '#BBFF33'],
                     [50, '#BBFF33'],
-                    [51, '#0DCC81'],
-                    [100, '#0DCC81'],
-                    [101, '#B323E8'],
-                    [200, '#B323E8'],
+                    [51, '#00ffff'],
+                    [100, '#00ffff'],
+                    [101, '#FF00FF'],
+                    [200, '#FF00FF'],
                     [201, '#CC1B0D'],
                     [300, '#CC1B0D']]
             }
@@ -127,9 +133,11 @@
    });
     
    map.on('click', 'locations', function (e) {
+   	var url=""
+
     new mapboxgl.Popup()
-        .setLngLat(e.features[0].geometry.coordinates)
-        .setHTML(e.features[0].properties.locality + " - " + e.features[0].properties.count)
+        .setLngLat(e.features[0].geometry.coordinates)         
+        .setHTML(e.features[0].properties.locality + " - " + e.features[0].properties.count + (e.features[0].properties.locality_type=="H" ? " - <a href=http://ebird.org/ebird/india/hotspot/" + e.features[0].properties.locality_id + " target=\"_blank\"> Hotspot Link</a>" : "" ) )
         .addTo(map);
    });
 
@@ -145,16 +153,17 @@
 
 });
 
+
 </script>
 
 <div id='legend' class='legend'>
-  <h4>Legend <br> Checklist count:</h4>  
-   <table>
-    <tr> <td><svg height="10" width="10"> <circle cx="5" cy="5" r="5" stroke="#BBFF33" stroke-width="2" fill="#BBFF33"/></svg>  : Upto 50 </td> </tr>
-    <tr><td><svg height="10" width="10"> <circle cx="5" cy="5" r="5" stroke="#0DCC81" stroke-width="2" fill="#0DCC81"/></svg>   : 51 to 100  </td> </tr>
-    <tr><td><svg height="10" width="10"> <circle cx="5" cy="5" r="5" stroke="#B323E8" stroke-width="2" fill="#B323E8"/></svg>   : 101 to 200 </td> </tr>
-    <tr> <td><svg height="10" width="10"> <circle cx="5" cy="5" r="5" stroke="#CC1B0D" stroke-width="2" fill="#CC1B0D"/></svg>  : 201 and above  </td></tr>
-    
+  <h3><b>ebird-India checklist locations until Aug 2017</b></h3>  
+   <table>   	
+    <tr> <td><svg height="12" width="12"> <circle cx="6" cy="7" r="4" stroke="#BBFF33" stroke-width="2" fill="#BBFF33"/></svg>    - Upto 50 checklists </td> </tr>
+    <tr><td><svg height="14" width="14"> <circle cx="7" cy="7" r="6" stroke="#00ffff" stroke-width="2" fill="#00ffff"/></svg>     - 51 to 100 checklists </td> </tr>
+    <tr><td><svg height="18" width="18"> <circle cx="8" cy="10" r="7" stroke="#FF00FF" stroke-width="2" fill="#FF00FF"/></svg>     - 101 to 200 checklists </td> </tr>
+    <tr> <td><svg height="22" width="22"> <circle cx="9" cy="13" r="8" stroke="#CC1B0D" stroke-width="2" fill="#CC1B0D"/></svg>   - 201 and above checklists </td></tr>
+    <tr> <td>Click on a location to get details.<br>Scroll with "Ctrl" + "Mouse Left Button" for tilted view</td></tr>    
 </div>
 
 </body>
