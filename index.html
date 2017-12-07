@@ -79,7 +79,7 @@
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/dark-v9',
-        zoom: 6.0,
+        zoom: 5.05,
         center: [77.493, 22.064],
         id:"mymap"
     });
@@ -93,10 +93,10 @@
         "type": "circle",
         "source": { 
             type: 'vector',           
-            url: 'mapbox://csbandi.1jb5pzoh'
+            url: 'mapbox://csbandi.4d09y564'
         },
         
-        "source-layer":"ebird_locations_2017_aug-d5m5al",
+        "source-layer":"ebird_locations_2017_aug_upda-3zbo2f",
         
         paint: {
             'circle-radius': {
@@ -114,8 +114,9 @@
             },
             // color circles by ethnicity, using data-driven styles
             
-            'circle-opacity': 0.45,
-
+            'circle-opacity': 0.8,
+            'circle-blur':0,
+            
             'circle-color': {
                 property: 'count',
                 type: 'interval',
@@ -137,7 +138,7 @@
 
     new mapboxgl.Popup()
         .setLngLat(e.features[0].geometry.coordinates)         
-        .setHTML(e.features[0].properties.locality + " - " + e.features[0].properties.count + (e.features[0].properties.locality_type=="H" ? " - <a href=http://ebird.org/ebird/india/hotspot/" + e.features[0].properties.locality_id + " target=\"_blank\"> Hotspot Link</a>" : "" ) )
+        .setHTML(e.features[0].properties.locality + "<br>" + e.features[0].properties.count + " checklists<br>" + (e.features[0].properties.locality_type=="H" ? "<a href=http://ebird.org/ebird/india/hotspot/" + e.features[0].properties.locality_id + " target=\"_blank\"> Hotspot Link</a>" : "" ) )
         .addTo(map);
    });
 
