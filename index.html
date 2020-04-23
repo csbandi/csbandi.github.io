@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>ebird-India checklist locations until Aug 2017 Visualisation</title>
+    <title>ebird-India locations and count of checklists per location until March 2020 Visualisation</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -78,7 +78,7 @@
     
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/dark-v9',
+        style: 'mapbox://styles/mapbox/dark-v9',//'mapbox://styles/csbandi/ck9c6lgda09hk1jor2t18bgpc'//'mapbox://styles/mapbox/dark-v9',
         zoom: 5.05,
         center: [77.493, 22.064],
         id:"mymap"
@@ -93,42 +93,44 @@
         "type": "circle",
         "source": { 
             type: 'vector',           
-            url: 'mapbox://csbandi.4d09y564'
+            url: 'mapbox://csbandi.25txmhmk'
         },
         
-        "source-layer":"ebird_locations_2017_aug_upda-3zbo2f",
+        "source-layer":"ebird_mar_2020_loc_chklst_cou-0fwc1p",
         
         paint: {
             'circle-radius': {
                 property: 'count',
                 type: 'exponential',
-                stops: [
+                 stops: [
                     [10, 5],
                     [50, 7],
-                    [100, 9],
-                    [200, 12],
-                    [300, 14],
-                    [400, 16],
-                    [1000, 18],
-                    [2000, 22]]             
+                    [100, 12],
+                    [200, 15],
+                    [300, 18],
+                    [400, 20],
+                    [1000, 22],
+                    [2000, 25]
+                    ]  
             },
             // color circles by ethnicity, using data-driven styles
             
-            'circle-opacity': 0.45,
+            'circle-opacity': 0.4,
             'circle-blur':0,
             
             'circle-color': {
                 property: 'count',
                 type: 'interval',
                 stops: [
-                    [0, '#BBFF33'],
-                    [50, '#BBFF33'],
+                    [0, '#e0f4b8'],
+                    [50, '#e0f4b8'],
                     [51, '#00ffff'],
-                    [100, '#00ffff'],
-                    [101, '#FF00FF'],
-                    [200, '#FF00FF'],
-                    [201, '#CC1B0D'],
-                    [300, '#CC1B0D']]
+                    [200, '#00ffff'],
+                    [201, '#FF00FF'],
+                    [1000, '#FF00FF'],
+                    [1001, '#CC1B0D'],
+                    [10000, '#CC1B0D']
+                    ]
             }
         }        
    });
@@ -158,14 +160,14 @@
 </script>
 
 <div id='legend' class='legend'>
-  <h4><b>ebird-India checklist locations until Aug 2017</b></h4>  
+  <h4><b>ebird-India checklist locations until March 2020</b></h4>  
    <table>   	
     <tr> <td><svg height="12" width="12"> <circle cx="6" cy="7" r="4" stroke="#BBFF33" stroke-width="2" fill="#BBFF33"/></svg>    - Upto 50 checklists </td> </tr>
-    <tr><td><svg height="14" width="14"> <circle cx="7" cy="7" r="6" stroke="#00ffff" stroke-width="2" fill="#00ffff"/></svg>     - 51 to 100 checklists </td> </tr>
-    <tr><td><svg height="18" width="18"> <circle cx="8" cy="10" r="7" stroke="#FF00FF" stroke-width="2" fill="#FF00FF"/></svg>     - 101 to 200 checklists </td> </tr>
-    <tr> <td><svg height="22" width="22"> <circle cx="9" cy="13" r="8" stroke="#CC1B0D" stroke-width="2" fill="#CC1B0D"/></svg>   - 201 and above checklists </td></tr>
+    <tr><td><svg height="14" width="14"> <circle cx="7" cy="7" r="6" stroke="#00ffff" stroke-width="2" fill="#00ffff"/></svg>     - 51 to 200 checklists </td> </tr>
+    <tr><td><svg height="18" width="18"> <circle cx="8" cy="10" r="7" stroke="#FF00FF" stroke-width="2" fill="#FF00FF"/></svg>     - 201 to 1000 checklists </td> </tr>
+    <tr> <td><svg height="22" width="22"> <circle cx="9" cy="13" r="8" stroke="#CC1B0D" stroke-width="2" fill="#CC1B0D"/></svg>   - 1001 and above checklists </td></tr>
     <tr> <td>Click on a location to get details.<br>Scroll with "Ctrl" + "Mouse Left Button" for tilted view</td></tr>
-     <tr> <td>eBird Basic Dataset Version:EBD_relMay-2017<br>Cornell Lab of Ornithology, Ithaca, New York. May 2017</td></tr>  
+     <tr> <td>eBird Basic Dataset. Version: EBD_relMar-2020<br>Cornell Lab of Ornithology, Ithaca, New York. May 2020</td></tr>  
 </div>
 
 </body>
